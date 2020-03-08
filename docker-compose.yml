@@ -1,0 +1,8 @@
+version: '3'
+services:
+  nayose:
+    build: dockerfile
+    volumes:
+    - .:/host/nayose
+    command: sh /startup.sh
+
