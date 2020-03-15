@@ -1,7 +1,9 @@
+import numpy as np
+import os
+import pandas as pd
+
 from nayose import __version__
 from nayose import split_address
-import csv
-import os
 
 
 def test_version():
@@ -9,11 +11,9 @@ def test_version():
 
 
 def test_separete_address():
-    file_path = os.path.dirname(__file__)
-    with open(os.path.join(file_path, 'data/test.csv')) as f:
-        reader = csv.reader(f)
-        for row in reader:
-            s, c, st = split_address(row[0])
-            assert s == row[1]
-            assert c == row[2]
-            assert st == row[3]
+    file_path = os.path.join(os.path.dirname(__file__), 'data/test.ft')
+    test = pd.read_feather(file_path)
+    test['Result'] = test['Address'].apply(split_address)
+    assert np.all(test['State'] == test['Result'].apply(lambda x: x[0]))
+    assert np.all(test['City'] == test['Result'].apply(lambda x: x[1]))
+    assert np.all(test['Street'] == test['Result'].apply(lambda x: x[2]))
