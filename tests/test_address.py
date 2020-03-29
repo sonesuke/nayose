@@ -2,12 +2,7 @@ import numpy as np
 import os
 import pandas as pd
 
-from nayose import __version__
 from nayose import split_address
-
-
-def test_version():
-    assert __version__ == '0.1.0'
 
 
 def test_separete_address():
