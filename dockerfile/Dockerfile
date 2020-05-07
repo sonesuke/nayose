@@ -1,4 +1,4 @@
-FROM python:3.8
+FROM python:3.7
 
 RUN curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
 ENV PATH $PATH:/root/.poetry/bin
