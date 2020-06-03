@@ -4,5 +4,6 @@ services:
     build: dockerfile
     volumes:
     - .:/host/nayose
+    working_dir: /host/nayose
     command: sh /startup.sh
 

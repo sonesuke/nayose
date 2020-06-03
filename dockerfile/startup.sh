@@ -1,1 +1,1 @@
-cd /host/nayose && poetry update && poetry run pytest tests
+poetry update && poetry build
