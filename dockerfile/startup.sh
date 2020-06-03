@@ -1,1 +1,1 @@
-poetry update && poetry build
+poetry update && poetry run pytest tests && poetry build
