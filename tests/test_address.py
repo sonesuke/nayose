@@ -5,7 +5,7 @@ import pandas as pd
 from nayose import split_address, complement_address
 
 
-def test_separete_address():
+def test_separate_address():
     file_path = os.path.join(os.path.dirname(__file__), 'data/test.ft')
     test = pd.read_feather(file_path)
     test['Result'] = test['Address'].apply(split_address)
