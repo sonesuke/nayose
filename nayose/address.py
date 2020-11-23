@@ -33,7 +33,7 @@ def split_address(addr):
     return state, city, addr[len(state) + len(city):]
 
 
-def _complete(a, b):
+def _complement(a, b):
     residual = a[len(b):]
     a = a[:len(b)]
     s = SequenceMatcher(None, a, b)
@@ -53,6 +53,6 @@ def _complete(a, b):
     return res + residual
 
 
-def complete_address(addr):
+def complement_address(addr):
     candidates = get_close_matches(addr, address)
-    return _complete(addr, candidates[0]) if len(candidates) > 0 else addr
+    return _complement(addr, candidates[0]) if len(candidates) > 0 else addr

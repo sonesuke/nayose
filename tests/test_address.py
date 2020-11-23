@@ -2,7 +2,7 @@ import numpy as np
 import os
 import pandas as pd
 
-from nayose import split_address, complete_address
+from nayose import split_address, complement_address
 
 
 def test_separete_address():
@@ -17,4 +17,4 @@ def test_separete_address():
 def test_complete_address():
     correct = '北海道札幌市中央区盤渓'
     test = '海札幌中区盤渓'
-    assert correct == complete_address(test)
+    assert correct == complement_address(test)
