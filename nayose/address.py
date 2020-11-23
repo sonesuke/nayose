@@ -14,6 +14,9 @@ cities = list(_data['City'])
 _data = pd.read_feather(os.path.join(src_path, 'data/address.ft'))
 address = list(_data['Address'])
 
+_data = pd.read_feather(os.path.join(src_path, 'data/state_and_city.ft'))
+states_and_cities = list(_data['StateAndCity'])
+
 
 state_expression = '(' + '|'.join(states) + ')'
 city_expression = '(' + '|'.join(cities) + ')'
@@ -33,26 +36,40 @@ def split_address(addr):
     return state, city, addr[len(state) + len(city):]
 
 
-def _complement(a, b):
-    residual = a[len(b):]
-    a = a[:len(b)]
-    s = SequenceMatcher(None, a, b)
+def _state_complement(_target):
+    return _target if _target in states else None
 
+
+def _city_complement(_target):
+    matches = [c for c in states_and_cities if re.search(_target + "$", c)]
+    return None if len(matches) == 0 else matches[0]
+
+
+def _complement(a, b):
+    if len(a) <= 10:
+        res = _state_complement(a)
+        if res is not None:
+            return res
+        res = _city_complement(a)
+        if res is not None:
+            return res
+
+    s = SequenceMatcher(None, a, b)
     res = ''
     for tag, i1, i2, j1, j2 in s.get_opcodes():
-        if tag == 'delete':
-            pass
-        elif tag == 'equal':
+        if tag == 'equal':
             res += a[i1:i2]
         elif tag == 'replace':
             res += b[j1:j2]
         elif tag == 'insert':
             res += b[j1:j2]
+        elif tag == 'delete' and len(b) == j1:
+            res += a[i1:i2]
         else:
             pass
-    return res + residual
+    return res
 
 
 def complement_address(addr):
-    candidates = get_close_matches(addr, address)
+    candidates = get_close_matches(addr, address, n=1, cutoff=0.3)
     return _complement(addr, candidates[0]) if len(candidates) > 0 else addr
