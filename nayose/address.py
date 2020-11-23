@@ -3,33 +3,32 @@ import pandas as pd
 import re
 from difflib import get_close_matches, SequenceMatcher
 
-src_path = os.path.dirname(__file__)
+_src_path = os.path.dirname(__file__)
 
-_data = pd.read_feather(os.path.join(src_path, 'data/state.ft'))
-states = list(_data['State'])
+_data = pd.read_feather(os.path.join(_src_path, 'data/state.ft'))
+_states = list(_data['State'])
 
-_data = pd.read_feather(os.path.join(src_path, 'data/city.ft'))
-cities = list(_data['City'])
+_data = pd.read_feather(os.path.join(_src_path, 'data/city.ft'))
+_cities = list(_data['City'])
 
-_data = pd.read_feather(os.path.join(src_path, 'data/address.ft'))
+_data = pd.read_feather(os.path.join(_src_path, 'data/address.ft'))
 address = list(_data['Address'])
 
-_data = pd.read_feather(os.path.join(src_path, 'data/state_and_city.ft'))
-states_and_cities = list(_data['StateAndCity'])
+_data = pd.read_feather(os.path.join(_src_path, 'data/state_and_city.ft'))
+_states_and_cities = list(_data['StateAndCity'])
 
-
-state_expression = '(' + '|'.join(states) + ')'
-city_expression = '(' + '|'.join(cities) + ')'
-state_regex = re.compile('^' + state_expression)
-city_regex = re.compile('^' + city_expression)
+_state_expression = '(' + '|'.join(_states) + ')'
+_city_expression = '(' + '|'.join(_cities) + ')'
+_state_regex = re.compile('^' + _state_expression)
+_city_regex = re.compile('^' + _city_expression)
 
 
 def split_address(addr):
-    m = state_regex.match(addr)
+    m = _state_regex.match(addr)
     if not m:
         return None, None, None
     state = m[1]
-    m = city_regex.match(addr[len(state):])
+    m = _city_regex.match(addr[len(state):])
     if not m:
         return state, None, None
     city = m[1]
@@ -37,11 +36,11 @@ def split_address(addr):
 
 
 def _state_complement(_target):
-    return _target if _target in states else None
+    return _target if _target in _states else None
 
 
 def _city_complement(_target):
-    matches = [c for c in states_and_cities if re.search(_target + "$", c)]
+    matches = [c for c in _states_and_cities if re.search(_target + "$", c)]
     return None if len(matches) == 0 else matches[0]
 
 
