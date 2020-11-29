@@ -60,6 +60,7 @@ def _complement(a, b):
             res += a[i1:i2]
         elif tag == 'replace':
             res += b[j1:j2]
+            print(b[j1:j2])
         elif tag == 'insert':
             res += b[j1:j2]
         elif tag == 'delete' and len(b) == j1:
@@ -69,6 +70,15 @@ def _complement(a, b):
     return res
 
 
+def _normalize(address):
+    m = re.search('^(.+?)([0-9０-９]+.*)', address)
+    if m is not None:
+        return m.group(1), m.group(2)
+    return address, ''
+
+
 def complement_address(addr):
-    candidates = get_close_matches(addr, address, n=1, cutoff=0.3)
-    return _complement(addr, candidates[0]) if len(candidates) > 0 else addr
+    head, tail = _normalize(addr)
+    candidates = get_close_matches(head, address, n=1, cutoff=0.3)
+    complemented_head = _complement(head, candidates[0]) if len(candidates) > 0 else head
+    return complemented_head + tail
