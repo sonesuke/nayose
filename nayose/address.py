@@ -60,7 +60,6 @@ def _complement(a, b):
             res += a[i1:i2]
         elif tag == 'replace':
             res += b[j1:j2]
-            print(b[j1:j2])
         elif tag == 'insert':
             res += b[j1:j2]
         elif tag == 'delete' and len(b) == j1:
