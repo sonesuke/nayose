@@ -20,7 +20,7 @@ jobs:
         shell: bash
         env:
           PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
-        run: docker-compose run mypo bash /app/scripts/build.sh ${{ steps.get_version.outputs.VERSION }}
+        run: docker-compose run nayose bash /app/scripts/build.sh ${{ steps.get_version.outputs.VERSION }}
 
       - name: Create release
         id: create_release
