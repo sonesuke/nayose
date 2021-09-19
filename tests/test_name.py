@@ -1,7 +1,7 @@
 from nayose import split_name
 
 
-def test_separate_name():
+def test_separate_name() -> None:
     last, first = split_name("田中一郎")
     assert last == "田中"
     assert first == "一郎"

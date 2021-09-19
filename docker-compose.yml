@@ -1,9 +1,9 @@
 version: '3'
 services:
   nayose:
-    build: dockerfile
+    build: .
     volumes:
-    - .:/host/nayose
-    working_dir: /host/nayose
+    - .:/app
+    working_dir: /app
     command: sh /startup.sh
 

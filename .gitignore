@@ -4,4 +4,4 @@ dist
 *.egg-info
 *.pyc
 nayose.iml
-poetry.lock
+.coverage
