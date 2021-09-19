@@ -13,11 +13,11 @@ Quick start
 
 nayose has two main function of data cleansing for Japanese address.
 
-`ccomplement_address` is a function to ccomplement dirty address. For example, the followings is a case of missing state(都道府県).
+`complement_address` is a function to complement dirty address. For example, the followings is a case of missing state(都道府県).
 
-    from nayose import ccomplement_address
+    from nayose import complement_address
 
-    ccomplement_address("千代田区大手町1−1−1大手町あいうえビル")
+    complement_address("千代田区大手町1−1−1大手町あいうえビル")
     > "東京都千代田区大手町1−1−1大手町あいうえビル"
 
 

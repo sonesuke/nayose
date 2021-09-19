@@ -2,5 +2,5 @@
 __version__ = "0.1.6"  # Increment automatically by build.sh
 
 
-from .address import comlement_address, split_address
+from .address import complement_address, split_address
 from .name import split_name

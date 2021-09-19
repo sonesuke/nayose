@@ -37,21 +37,21 @@ def split_address(addr: str) -> Tuple[Union[str, None], Union[str, None], Union[
     return state, city, addr[len(state) + len(city) :]
 
 
-def _state_comlement(_target: str) -> Union[str, None]:
+def _state_complement(_target: str) -> Union[str, None]:
     return _target if _target in _states else None
 
 
-def _city_comlement(_target: str) -> Union[str, None]:
+def _city_complement(_target: str) -> Union[str, None]:
     matches = [c for c in _states_and_cities if re.search(_target + "$", c)]
     return None if len(matches) == 0 else matches[0]
 
 
-def _comlement(a: str, b: str) -> str:
+def _complement(a: str, b: str) -> str:
     if len(a) <= 10:
-        res = _state_comlement(a)
+        res = _state_complement(a)
         if res is not None:
             return res
-        res = _city_comlement(a)
+        res = _city_complement(a)
         if res is not None:
             return res
 
@@ -78,16 +78,16 @@ def _normalize(address: str) -> Tuple[str, str]:
     return address, ""
 
 
-def _rule_based_comlement(address: str) -> str:
+def _rule_based_complement(address: str) -> str:
     rules = [("東京都大手町", "東京都千代田区大手町")]
     for rule in rules:
         address = re.sub(rule[0], rule[1], address)
     return address
 
 
-def comlement_address(addr: str) -> str:
-    addr = _rule_based_comlement(addr)
+def complement_address(addr: str) -> str:
+    addr = _rule_based_complement(addr)
     head, tail = _normalize(addr)
     candidates = get_close_matches(head, address, n=1, cutoff=0.3)
-    complemented_head = _comlement(head, candidates[0]) if len(candidates) > 0 else head
+    complemented_head = _complement(head, candidates[0]) if len(candidates) > 0 else head
     return complemented_head + tail
