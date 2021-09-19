@@ -78,7 +78,17 @@ def _normalize(address: str) -> Tuple[str, str]:
     return address, ""
 
 
+def _rule_based_complete(address: str) -> str:
+    rules = [
+        ("東京都大手町", "東京都千代田区大手町")
+    ]
+    for rule in rules:
+        address = re.sub(rule[0], rule[1], address)
+    return address
+
+
 def complete_address(addr: str) -> str:
+    addr = _rule_based_complete(addr)
     head, tail = _normalize(addr)
     candidates = get_close_matches(head, address, n=1, cutoff=0.3)
     complemented_head = _complete(head, candidates[0]) if len(candidates) > 0 else head

@@ -95,3 +95,15 @@ def test_complete_address_13() -> None:
 def test_complete_address_14() -> None:
     test = "東京都"
     assert split_address(test)[0] == "東京都"
+
+
+def test_complete_address_15() -> None:
+    correct = "東京都千代田区大手町"
+    test = "東京都大手町"
+    assert correct == complete_address(test)
+
+
+def test_complete_address_16() -> None:
+    correct = "東京都大島町"
+    test = "東京都大島町"
+    assert correct == complete_address(test)
