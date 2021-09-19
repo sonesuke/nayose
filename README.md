@@ -13,15 +13,15 @@ Quick start
 
 nayose has two main function of data cleansing for Japanese address.
 
-`complete_address` is a function to complete dirty address. For example, the followings is a case of missing state(都道府県).
+`ccomplement_address` is a function to ccomplement dirty address. For example, the followings is a case of missing state(都道府県).
 
-    from nayose import complete_address
+    from nayose import ccomplement_address
 
-    complete_address("千代田区大手町1−1−1大手町あいうえビル")
+    ccomplement_address("千代田区大手町1−1−1大手町あいうえビル")
     > "東京都千代田区大手町1−1−1大手町あいうえビル"
 
 
-`split_address` is a function to split complete address to state(都道府県), city(市区郡) and street(その他).
+`split_address` is a function to split full address to state(都道府県), city(市区郡) and street(その他).
 
     from nayose import split_address
 
