@@ -79,7 +79,11 @@ def _normalize(address: str) -> Tuple[str, str]:
 
 
 def _rule_based_complement(address: str) -> str:
-    rules = [("東京都大手町", "東京都千代田区大手町")]
+    rules = [
+        ("東京都大手町", "東京都千代田区大手町"),
+        ("^海外([^町]|$)", r"\1"),
+    ]
+
     for rule in rules:
         address = re.sub(rule[0], rule[1], address)
     return address
