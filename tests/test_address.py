@@ -107,3 +107,21 @@ def test_complement_address_16() -> None:
     correct = "東京都大島町"
     test = "東京都大島町"
     assert correct == complement_address(test)
+
+
+def test_complement_address_17() -> None:
+    correct = "A"
+    test = "海外A"
+    assert correct == complement_address(test)
+
+
+def test_complement_address_18() -> None:
+    correct = ""
+    test = "海外"
+    assert correct == complement_address(test)
+
+
+def test_complement_address_19() -> None:
+    correct = "神奈川県三浦市海外町"
+    test = "海外町"
+    assert correct == complement_address(test)
