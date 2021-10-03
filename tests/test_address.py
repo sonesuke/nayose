@@ -110,13 +110,13 @@ def test_complement_address_16() -> None:
 
 
 def test_complement_address_17() -> None:
-    correct = "A"
+    correct = "海外A"
     test = "海外A"
     assert correct == complement_address(test)
 
 
 def test_complement_address_18() -> None:
-    correct = ""
+    correct = "海外"
     test = "海外"
     assert correct == complement_address(test)
 
@@ -125,3 +125,9 @@ def test_complement_address_19() -> None:
     correct = "神奈川県三浦市海外町"
     test = "海外町"
     assert correct == complement_address(test)
+
+
+def test_complement_address_20() -> None:
+    correct = "海外"
+    test = "海外"
+    assert correct == split_address(test)[1]
